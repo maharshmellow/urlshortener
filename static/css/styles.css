@@ -1,0 +1,98 @@
+html, body {
+    position: relative;
+    height: 100%;
+    background-color: white;
+    overflow-y: hidden;
+    /*background: #FFFFFF;*/
+    color: #463C70;
+}
+
+#backplate {
+    /*margin-left: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 50px;*/
+    width: 100%;
+    height: 100vh;
+    background: #FFFFFF;
+    /*box-shadow: -15px 46px 56px 15px rgba(0, 0, 0, 0.50);
+    border-radius: 4px;*/
+    overflow-x: hidden;
+}
+
+#maintitle {
+    font-family: "BG";
+    font-weight: 700;
+    font-size: 20px;
+    padding-top: 40px;
+    color: #463C70;
+    letter-spacing: -0.16px;
+}
+#urlMessage{
+    font-family: "BG";
+    font-weight: 300;
+    font-size: 20px;
+    padding-top: 40px;
+    color: #463C70;
+    letter-spacing: -0.16px;
+    display: none;
+
+}
+#errorMessage{
+    font-family: "BG";
+    font-weight: 300;
+    font-size: 20px;
+    padding-top: 40px;
+    color: #F5003C;
+    letter-spacing: -0.16px;
+    display: none;
+}
+#urlBlock{
+    margin-top: 15vh;
+}
+
+#urlTitle{
+    position: absolute;
+    font-family: "BG";
+    font-weight: 700;
+    font-size: 1.9em;
+    color: #463C70;
+    margin-top: 5px;
+}
+
+#urlBar{
+    width: 100%;
+}
+
+#urlInput{
+    width: 100%;
+    height: 100px;
+    font-family: "BG";
+    font-weight: 300;
+    font-size: 1.5em;
+    color: #463C70;
+    background-color: #F7F3FF;
+    border: 0;
+    outline: none !important;
+}
+
+#message{
+    font-family: "BG";
+    font-weight: 800;
+    font-size: 1.5em;
+    font-style: italic;
+    letter-spacing: 1px;
+    color: #F5003C;
+}
+
+@media only screen and (max-width: 500px) {
+    #backplate {
+        margin-left: 5px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-right: 5px;
+        background: #FFFFFF;
+        box-shadow: -15px 46px 56px 15px rgba(0, 0, 0, 0.50);
+        border-radius: 4px;
+    }
+}

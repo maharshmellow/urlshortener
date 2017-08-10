@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Maharsh Patel</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css" />
+	<link rel="stylesheet" href="static/css/fonts.css" type="text/css" />
+	<link rel="stylesheet" href="static/css/styles.css?a=12" type="text/css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-4"></div>
+			<div id="maintitle" class="col-sm-4 text-center center-block">
+				URL Shortener
+			</div>
+			<div class="col-sm-4"></div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-4 col-md-3 col-sm-2"></div>
+			<div id="urlBlock" class="col-lg-4 col-md-6 col-sm-8">
+				<span id="urlTitle">Enter URL</span><br>
+				<h1 id="urlBar">
+                    <input id="urlInput" name="url" type="text"></input>
+				</h1>
+			</div>
+			<div class="col-lg-4 col-md-3 col-sm-2"></div>
+		</div>
+        <div class="row">
+			<div class="col-sm-4"></div>
+			<div id="urlMessage" class="col-sm-4 text-center center-block">
+				<span id="url_value" style="font-weight: 700;"> </span>
+			</div>
+			<div class="col-sm-4"></div>
+		</div>
+        <div class="row">
+			<div class="col-sm-4"></div>
+			<div id="errorMessage" class="col-sm-4 text-center center-block">
+				<span style="font-weight: 700;"> Invalid URL </span>
+			</div>
+			<div class="col-sm-4"></div>
+		</div>
+
+	</div>
+</body>
+
+<script>
+	// submit form when enter key is pressed
+	$("#urlInput").keypress(function(event) {
+		if (event.which == 13) {
+			event.preventDefault();
+            var formdata = new FormData();
+            var url = document.getElementById("urlInput").value;
+            formdata.append("url", url);
+
+            $.ajax({
+                url: '/shorten',
+                type: "POST",
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success: function(response){
+                    if (response.status == 0){
+                        // show the error
+                        document.getElementById("urlMessage").style.display = "none";
+                        document.getElementById("errorMessage").style.display = "block";
+                    }
+                    else{
+                        // show the url
+                        document.getElementById("errorMessage").style.display = "none";
+                        document.getElementById("url_value").innerHTML = response.shortened_url;
+                        document.getElementById("urlMessage").style.display = "block";
+                        copyToClipboard("test");
+                    }
+
+                }
+
+            })
+		}
+	});
+</script>
+<script>
+function copyToClipboard(text) {
+    var input = document.createElement('textarea');
+    document.body.appendChild(input);
+    input.value = text;
+    input.focus();
+    input.select();
+    document.execCommand('Copy');
+    input.remove();
+}
+</script>
+</html>
