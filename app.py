@@ -2,14 +2,19 @@ from flask import Flask, jsonify, render_template, request, redirect
 import hashlib
 import validators
 from pymongo import MongoClient
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 app = Flask(__name__)
+limiter = Limiter(app, key_func=get_remote_address)
 
 @app.route("/")
+@limiter.exempt
 def index():
     return render_template("home.html")
 
 @app.route("/shorten", methods=["POST"])
+@limiter.limit("60/hour")
 def shorten():
     if request.method == "POST":
         try:
