@@ -4,6 +4,7 @@ import validators
 from pymongo import MongoClient
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+import os
 
 app = Flask(__name__)
 limiter = Limiter(app, key_func=get_remote_address)
@@ -33,7 +34,7 @@ def shorten():
         data = {}
         data["url"] = url
         data["_id"] = code
-        client = MongoClient("mongodb://temp:temp@ds125113.mlab.com:25113/heroku_url")
+        client = MongoClient(os.environ.get("MONGO_URL"))
         db = client.get_default_database()
         urls = db["urls"]
 
@@ -45,7 +46,7 @@ def shorten():
 
 @app.route("/<code>")
 def redirect_code(code):
-    client = MongoClient("mongodb://temp:temp@ds125113.mlab.com:25113/heroku_url")
+    client = MongoClient(os.environ.get("MONGO_URL"))
     db = client.get_default_database()
     urls = db["urls"]
 
