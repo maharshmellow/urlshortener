@@ -1,0 +1,4 @@
+Flask==0.12.2
+gunicorn==19.6.0
+pymongo==3.5.0
+validators==0.12.0
